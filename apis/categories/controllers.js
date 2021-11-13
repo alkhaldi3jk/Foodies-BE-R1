@@ -3,10 +3,11 @@ const Recipes = require("../../db/models/Recipes");
 
 exports.fetchCategories = async (req, res, next) => {
   try {
-    const categories = await Category.find().populate({
-      path: "recipes",
-      select: "name",
-    });
+    const categories = await Category.find()
+    // .populate({
+    //   path: "recipes",
+    //   select: "name",
+    // });
     return res.json(categories);
   } catch (error) {
     next(error);
