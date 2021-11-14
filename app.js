@@ -33,7 +33,7 @@ app.use(
   "/category",
   categoryRoutes
 );
-app.use(`/category/categorySlug`, recipeRoutes)
+app.use("/category/:categorySlug", recipeRoutes)
 app.use("/media", express.static(path.join(__dirname, "media")));
 
 
