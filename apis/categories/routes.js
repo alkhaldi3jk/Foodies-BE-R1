@@ -21,16 +21,18 @@ router.param("recipesId", async (req, res, next, recipesId) => {
 });
 
 router.get("", fetchCategories);
+
+
 router.post(
   "",
   passport.authenticate("jwt", { session: false }),
   upload.single("image"),
   categoryCreate
 );
-// router.post(
-//   "/:categoryId/recipes",
-//   passport.authenticate("jwt", { session: false }),
-//   upload.single("image"),
-//   recipesCreate
-// );
+router.post(
+  "/:categorySlug/recipes",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("image"),
+  recipeCreate
+);
 module.exports = router;

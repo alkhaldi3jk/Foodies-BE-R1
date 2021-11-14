@@ -22,7 +22,7 @@ exports.categoryCreate = async (req, res, next) => {
     }
     req.body.recipes = req.params.recipesId;
     const newCategory = await Category.create(req.body);
-//    await newCategory.populate("recipes");
+  //  await newCategory.populate("recipes");
     return res.status(201).json(newCategory);
   } catch (error) {
     next(error);
@@ -30,7 +30,7 @@ exports.categoryCreate = async (req, res, next) => {
 };
 
 
-exports.recipesCreate = async (req, res, next) => {
+exports.recipeCreate = async (req, res, next) => {
   try {
     if (req.file) {
       req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
@@ -39,10 +39,10 @@ exports.recipesCreate = async (req, res, next) => {
     req.body.owner=req.user._id
     const newRecipes = await Recipes.create(req.body);
     await newRecipes.populate("category");
-    await newRecipes.populate({
-      path:"owner",
-      select:"username"
-    })
+    // await newRecipes.populate({
+    //   path:"owner",
+    //   select:"username"
+    // })
     
     return res.status(201).json(newRecipes);
 

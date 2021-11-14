@@ -6,11 +6,11 @@ const morgan = require("morgan");
 const cors = require("cors");
 const usersRoutes = require("./apis/users/routes");
 const categoryRoutes = require("./apis/categories/routes");
+const recipeRoutes=require("./apis/recipes/routes")
 const passport = require("passport");
 const path = require("path");
 
 
-const upload = require("./middlewares/multer");
 
 const { localStrategy, jwtStrategy } = require("./middlewares/passport");
 const app = express();
@@ -31,11 +31,11 @@ passport.use(jwtStrategy);
 app.use("/", usersRoutes);
 app.use(
   "/category",
-  passport.authenticate("jwt", { session: false }),
-  upload.single("image"),
   categoryRoutes
 );
+app.use(`/category/categorySlug`, recipeRoutes)
 app.use("/media", express.static(path.join(__dirname, "media")));
+
 
 app.use(errorHandler);
 
